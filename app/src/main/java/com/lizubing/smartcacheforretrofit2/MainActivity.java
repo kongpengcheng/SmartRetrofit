@@ -3,15 +3,18 @@ package com.lizubing.smartcacheforretrofit2;
 import android.Manifest;
 import android.os.Build;
 import android.support.annotation.BoolRes;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.lizubing.smartcache.Net;
 import com.lizubing.smartcache.SmartCallBack;
+import com.lizubing.smartcache.base.BaseActivity;
 import com.lizubing.smartcacheforretrofit2.retrofit.ImageListBean;
 import com.lizubing.smartcacheforretrofit2.retrofit.MeoHttp;
-import com.lizubing.smartcacheforretrofit2.retrofit.Net;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,24 +26,37 @@ import retrofit2.Response;
  * Email kongpengcheng@aliyun.com.
  * Description:
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private ListView listView;
     private ImageListAdapter adapter;
     private String url = "http://58.56.128.105:8080/rrs/center?method=rrs.gis.get.regionNew&timestamp=1495874699574&access_token=YTcwNWJmOGItMmNjYS00OTQ5LWE4YTMtYjAzMGI5YmFiZTY4&page_size=10000";
     private String urldd;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//
+//        urldd = url.replaceAll("&timestamp=\\d{10,13}", "");
+//      //  String newStr = url.substring(url.indexOf("&timestamp"), url.indexOf("&access_token"));
+//        Log.d("url------------>", urldd);
+//        initView();
+//        initData();
+//        //  requestMultiplePermissions();
+//
+//    }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void setup(@Nullable Bundle savedInstanceState) {
+        super.setup(savedInstanceState);
         urldd = url.replaceAll("&timestamp=\\d{10,13}", "");
-      //  String newStr = url.substring(url.indexOf("&timestamp"), url.indexOf("&access_token"));
-        Log.d("url------------>", urldd);
         initView();
         initData();
-        //  requestMultiplePermissions();
-
     }
 
     private static final int REQUEST_CODE = 111;
